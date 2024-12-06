@@ -1,0 +1,4 @@
+<!-- app.component.html -->
+<app-header *ngIf="authService.currentUser | async"></app-header> <!-- Show header only if user is logged in -->
+<app-footer></app-footer>
+<router-outlet></router-outlet>

@@ -1,0 +1,47 @@
+<div class="profile-container">
+    <!-- Left side: Profile options -->
+    <div class="profile-nav">
+      <div class="profile-icon">
+        <i class="user-icon">👤</i> <!-- Profile Icon -->
+        <span>{{ currentUser.username }}</span> <!-- Display username -->
+      </div>
+      <ul class="profile-options">
+        <li (click)="setSelectedOption('profile')">Profile</li>
+        <li (click)="setSelectedOption('bookingHistory')">Booking History</li>
+        <li (click)="setSelectedOption('settings')">Settings</li>
+        <!-- Logout Option -->
+        <li (click)="logout()">Logout</li>
+      </ul>
+    </div>
+  
+    <!-- Right side: Display content based on selected option -->
+    <div class="profile-content">
+      <div *ngIf="selectedOption === 'profile'">
+        <h3>Profile</h3>
+        <p>Username: {{ currentUser.username }}</p>
+        <p>Email: {{ currentUser.email }}</p>
+        <!-- Add more profile details here -->
+      </div>
+  
+      <div *ngIf="selectedOption === 'bookingHistory'">
+        <h3>Booking History</h3>
+        <ul>
+          <li *ngFor="let booking of bookingHistory">
+            <div>{{ booking.date }} - {{ booking.location }} - {{ booking.duration }} hrs</div>
+            <div>Cost: ${{ booking.cost }}</div>
+          </li>
+        </ul>
+      </div>
+  
+      <div *ngIf="selectedOption === 'settings'">
+        <h3>Account Settings</h3>
+        <form>
+          <label for="email">Email: </label>
+          <input id="email" type="email" [(ngModel)]="currentUser.email" />
+          <!-- Add more settings form fields here -->
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

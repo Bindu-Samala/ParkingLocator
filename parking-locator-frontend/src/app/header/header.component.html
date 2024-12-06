@@ -1,0 +1,27 @@
+<header class="app-header" [class.disabled]="isHeaderDisabled">
+    <nav class="navbar">
+      <div class="logo">
+        <a routerLink="/">Parking Locator</a>
+      </div>
+      <ul class="nav-links">
+        <li><a routerLink="/user-dashboard">Home</a></li>
+  
+        <!-- Role-based navigation -->
+        <li *ngIf="hasRole('ROLE_USER')"><a routerLink="/user-dashboard">User Dashboard</a></li>
+        <li *ngIf="hasRole('ROLE_ADMIN')"><a routerLink="/admin-dashboard">Admin Dashboard</a></li>
+  
+        <!-- User Icon and Dropdown Menu -->
+        <li *ngIf="currentUser" class="user-icon-container">
+          <button (click)="toggleMenu()" class="user-icon-button">
+            <!-- Round User Icon -->
+            <i class="user-icon">👤</i> <!-- Replace with your desired icon -->
+          </button>
+          <ul *ngIf="menuVisible" class="dropdown-menu">
+            <li><a routerLink="/profile">Profile</a></li> <!-- Profile Link -->
+            <li><button (click)="logout()">Logout</button></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  

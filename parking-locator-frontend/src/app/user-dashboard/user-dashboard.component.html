@@ -1,0 +1,39 @@
+<div class="container">
+    <h2>Parking Spot Booking</h2>
+  
+    <!-- Google Map to show parking spots -->
+    <div id="map" style="height: 400px; width: 100%;"></div>
+  
+    <!-- Display the available spots -->
+    <div *ngIf="selectedSpot">
+      <h3>Selected Parking Spot</h3>
+      <p><strong>Location:</strong> {{ selectedSpot.location }}</p>
+      <p><strong>Spot Number:</strong> {{ selectedSpot.spotNumber }}</p>
+  
+      <!-- Booking form -->
+      <form (ngSubmit)="bookParkingSpot()">
+        <div class="form-group">
+          <label for="startTime">Start Time:</label>
+          <input type="datetime-local" id="startTime" [(ngModel)]="bookingDetails.bookingStartTime" name="startTime" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="endTime">End Time:</label>
+          <input type="datetime-local" id="endTime" [(ngModel)]="bookingDetails.bookingEndTime" name="endTime" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Book Now</button>
+      </form>
+    </div>
+  
+    <!-- Display available parking spots -->
+    <div *ngIf="parkingSpots.length">
+      <h3>Available Parking Spots</h3>
+      <ul>
+        <li *ngFor="let spot of parkingSpots">
+          <button (click)="selectParkingSpot(spot)">
+            {{ spot.location }} ({{ spot.spotNumber }})
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
